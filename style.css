@@ -29,3 +29,8 @@ li{
 .item-err{
     color: red;
 }
+
+.er-nm{
+    color: black;
+    text-transform: uppercase;
+}
