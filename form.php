@@ -51,10 +51,12 @@ function valid(array $post): array
         }
         if (!$validate['error']){
             $validate['success'] = true;
-            array_push($validate['messages'],"Ваш логин:{$login}",
-                "Ваш пароль:{$password}",
+            array_push($validate['messages'],
                 "Ваше имя:{$firstName}",
-                "Ваша фамилия:{$lastName}"
+                "Ваша фамилия:{$lastName}",
+                "Ваш логин:{$login}",
+                "Ваш пароль:{$password}",
+
             );
         }
         return $validate;
