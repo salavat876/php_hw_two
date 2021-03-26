@@ -13,8 +13,8 @@ function valid(array $post): array
     if (!empty($post['login']) && !empty($post['password']) && !empty($post['firstName']) && !empty($post['lastName'])) {
         $login = trim($post['login']); //trim - очищает строку
         $password = trim($post['password']);
-        $firstName = trim($post['password']);
-        $lastName = trim($post['password']);
+        $firstName = trim($post['firstName']);
+        $lastName = trim($post['lastName']);
 
         $constrains = [
             'login' => 6,
