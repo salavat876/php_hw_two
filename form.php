@@ -41,22 +41,20 @@ function valid(array $post): array
         if (!$validateForm['firstName']) {
             $validate['error'] = true;
             array_push($validate['messages'],
-                "имя должно содержать русские только буквы и пробелы!");
+                "имя должно содержать русские только буквы и пробелы!"."<span class='er-nm'>"."{$firstName} неккоректно"."</span>");
         }
 
         if (!$validateForm['lastName']) {
             $validate['error'] = true;
             array_push($validate['messages'],
-                "фамилия должна содержать только русские буквы и пробелы!");
+                "фамилия должна содержать только русские буквы и пробелы! "."<span class='er-nm'>"."{$lastName} неккоректно"."</span>");
         }
         if (!$validate['error']){
             $validate['success'] = true;
-            array_push($validate['messages'],
-                "Ваше имя:{$firstName}",
-                "Ваша фамилия:{$lastName}",
-                "Ваш логин:{$login}",
+            array_push($validate['messages'],"Ваш логин:{$login}",
                 "Ваш пароль:{$password}",
-
+                "Ваше имя:{$firstName}",
+                "Ваша фамилия:{$lastName}"
             );
         }
         return $validate;
