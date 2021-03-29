@@ -14,7 +14,7 @@
 
 <form action="/" method="post" class="flex-block">
     <span>Имя</span>
-    <input type="text" name="firstName" value="">
+    <input type="text" name="firstName">
     <span>Фамилия</span>
     <input type="text" name="lastName">
     <span>логин</span>
@@ -25,24 +25,24 @@
     <button type="submit">Отправить</button>
 </form>
 <?php $validate = valid($_POST); ?>
+<?php  $errorMessage = 'Вы допустили ошибку'; ?>
+<?php $positiveMessage = 'Вы успешно прошли валидацию!Поздравляем!';?>
 
-<?php if (!empty($validate['error']) && $validate['error']){
-    echo 'Вы допустили ошибку!';
-    foreach( $validate['messages'] as $key) {
-        echo '<p class="item-err">'. $key . '</p>';
-    }
+<?php if (!empty($validate['error']) && $validate['error']):?>
+    <p class="text"><?= $errorMessage ?></p>
+    <?php foreach ($validate['messages'] as $message):?>
+        <p class="item-err"><?= $message ?></p>
+<?php endforeach;?>
+<?php endif;?>
 
-}
 
-?>
 
-<?php if (!empty($validate['success']) && $validate['success']){
-    echo 'Вы успешно прошли валидацию!';
-    foreach( $validate['messages'] as $key  ) {
-        echo  '<p class="item">'. $key . '</p>';
-    }
-}
-?>
+<?php if (!empty($validate['success']) && $validate['success']):?>
+    <p class="text"><?= $positiveMessage ?></p>
+    <?php foreach ($validate['messages'] as $message):?>
+        <p class="item"><?= $message ?></p>
+    <?php endforeach;?>
+<?php endif;?>
 
 </body>
 </html>

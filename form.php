@@ -16,11 +16,10 @@ function valid(array $post): array
         $firstName = trim($post['firstName']);
         $lastName = trim($post['lastName']);
 
+
         $constrains = [
             'login' => 6,
             'password' => 7,
-            'firstName' => preg_match("/^[а-яА-Я ]*$/", $firstName),
-            'lastName' => preg_match("/^[а-яА-Я ]*$/", $lastName)
         ];
 
 
@@ -51,10 +50,11 @@ function valid(array $post): array
         }
         if (!$validate['error']){
             $validate['success'] = true;
-            array_push($validate['messages'],"Ваш логин:{$login}",
-                "Ваш пароль:{$password}",
+            array_push($validate['messages'],
                 "Ваше имя:{$firstName}",
-                "Ваша фамилия:{$lastName}"
+                "Ваша фамилия:{$lastName}",
+                "Ваш логин:{$login}",
+                "Ваш пароль:{$password}"
             );
         }
         return $validate;
@@ -73,22 +73,26 @@ function valigData(string $login, string $password,string $firstName,string $las
         'lastName' => true,
     ];
 
-    if (strlen($login) < $constrains['login']) {
+    if (strlen($login) <= $constrains['login']) {
         $validateForm['login'] = false;
     }
 
-    if (strlen($password) < $constrains['password']) {
+    if (strlen($password) <= $constrains['password']) {
         $validateForm['password'] = false;
     }
 
-    if (!preg_match('/^[а-яё ]++$/ui',$firstName)) {
+    if (!validNames($firstName)) {
         $validateForm['firstName'] = false;
     }
 
-    if (!preg_match('/^[а-яё ]++$/ui',$lastName)) {
+    if (!validNames($lastName)) {
         $validateForm['lastName'] = false;
     }
 
     return $validateForm;
 
+}
+
+function validNames (string $randomName){
+    return preg_match('/^[а-яё ]++$/ui',$randomName);
 }
